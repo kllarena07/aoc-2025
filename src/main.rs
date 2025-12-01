@@ -1,8 +1,8 @@
 use std::fs;
 
 fn get_rotations(file_name: &str) -> Vec<String> {
-    let contents =
-        fs::read_to_string(file_name).expect(&format!("Could not find file {}", file_name));
+    let expect_msg = format!("Error: Could not find file {}.", file_name);
+    let contents = fs::read_to_string(file_name).expect(&expect_msg);
 
     contents
         .split("\n")
