@@ -44,18 +44,27 @@ fn turn_dial(password: &mut u32, dial: &mut i32, direction: &char, clicks: i32) 
     println!("The dial is rotated {direction}{clicks} to point at {dial}");
 }
 
+fn parse_rotation(rotation: &str) -> (char, i32) {
+    let dir_expect_msg = "Error: could not parse direction.";
+    let clicks_expect_msg = "Error: could not parse clicks.";
+
+    let mut rotation_chars = rotation.chars();
+    let direction = rotation_chars.nth(0).expect(dir_expect_msg);
+    let clicks: i32 = rotation[1..]
+        .to_owned()
+        .parse::<i32>()
+        .expect(clicks_expect_msg);
+
+    (direction, clicks)
+}
+
 fn main() {
     let mut dial: i32 = 50;
     let mut password: u32 = 0;
     let rotations = get_rotations("./input.txt");
 
     for rotation in rotations {
-        let mut rot_chars = rotation.chars();
-        let direction = rot_chars.nth(0).expect("Could not parse direction");
-        let clicks: i32 = rotation[1..]
-            .to_owned()
-            .parse::<i32>()
-            .expect("Error parsing clicks");
+        let (direction, clicks) = parse_rotation(&rotation);
 
         turn_dial(&mut password, &mut dial, &direction, clicks);
     }
