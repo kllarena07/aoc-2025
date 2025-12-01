@@ -45,5 +45,20 @@ fn turn_dial(password: &mut u32, dial: &mut i32, direction: &char, clicks: i32) 
 }
 
 fn main() {
-    println!("Hello, world!");
+    let mut dial: i32 = 50;
+    let mut password: u32 = 0;
+    let rotations = get_rotations("./input.txt");
+
+    for rotation in rotations {
+        let mut rot_chars = rotation.chars();
+        let direction = rot_chars.nth(0).expect("Could not parse direction");
+        let clicks: i32 = rotation[1..]
+            .to_owned()
+            .parse::<i32>()
+            .expect("Error parsing clicks");
+
+        turn_dial(&mut password, &mut dial, &direction, clicks);
+    }
+
+    println!("Password is {}", password);
 }
