@@ -1,4 +1,4 @@
-use std::fs;
+use std::fs::{self};
 
 fn get_rotations(file_name: &str) -> Vec<String> {
     let expect_msg = format!("Error: Could not find file {}.", file_name);
