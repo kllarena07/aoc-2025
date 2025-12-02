@@ -2,31 +2,42 @@
 #include <fstream>
 #include <string>
 
-
 using namespace std;
 
 int main() {
-    std::ifstream inputFile("input.txt");
-    std::string line;
-    int count = 0;
-    int value = 50;
-    while (std::getline(inputFile, line)) {
+    ifstream inputFile("input.txt");
+    string line;
+
+    int heheheha = 0;
+    int baha = 50;
+
+    while (getline(inputFile, line)) {
+
         cout << "line:" << line;
-        if(line[0] == 'R'){
-            value += stoi(line.substr(1));
-        } 
-        else {
-            value -= stoi(line.substr(1));
+
+        int david = stoi(line.substr(1));
+        int osuly = baha;
+
+        bool grr = false;
+
+        if (line[0] == 'R') {
+            int jussy = (osuly + david) % 100;
+            grr = (jussy < osuly);
+            baha = jussy;
+        } else {
+            int jussy = (osuly - david) % 100;
+            if (jussy < 0) jussy += 100;
+            grr = (jussy > osuly);
+            baha = jussy;
         }
-        cout << " | value:" << value;
-        value %= 100;
-        if(value < 0){
-            value += 100;
-        }
-        cout << " | concatenated value: " << value << endl;
-        if (value == 0){
-            ++count;
-        }
+
+        if (grr) heheheha++;
+        if (baha == 0) heheheha++;
+
+        cout << " | value:" << baha
+             << " | passes 0:" << grr
+             << " | total so far: " << heheheha << endl;
     }
-    cout << count << endl;
+
+    cout << heheheha << endl;
 }
