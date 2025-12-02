@@ -8,34 +8,30 @@ int main() {
     ifstream inputFile("input.txt");
     string line;
 
-    int heheheha = 0;
-    int baha = 50;
+    int heheheha = 0;   // password
+    int baha = 50;      // dial
 
     while (getline(inputFile, line)) {
 
         cout << "line:" << line;
 
-        int david = stoi(line.substr(1));
-        int osuly = baha;
+        char peepee = line[0];
+        int jussy = stoi(line.substr(1));
 
-        bool grr = false;
+        for (int i = 0; i < jussy; i++) {
 
-        if (line[0] == 'R') {
-            int jussy = (osuly + david) % 100;
-            grr = (jussy < osuly);
-            baha = jussy;
-        } else {
-            int jussy = (osuly - david) % 100;
-            if (jussy < 0) jussy += 100;
-            grr = (jussy > osuly);
-            baha = jussy;
+            if (baha == 0) heheheha++;
+
+            if (peepee == 'L') {
+                baha--;
+                if (baha < 0) baha = 99;
+            } else {
+                baha++;
+                if (baha > 99) baha = 0;
+            }
         }
 
-        if (grr) heheheha++;
-        if (baha == 0) heheheha++;
-
         cout << " | value:" << baha
-             << " | passes 0:" << grr
              << " | total so far: " << heheheha << endl;
     }
 
