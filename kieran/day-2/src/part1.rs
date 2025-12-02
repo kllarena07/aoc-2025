@@ -27,7 +27,7 @@ impl Part1 {
         let (lower, upper) = self.parse_range(range);
 
         // invalid ids are:
-        // - only EVEN
+        // - only have an EVEN length
         // - symmetric
 
         let mut invalid_ids: Vec<u64> = vec![];
