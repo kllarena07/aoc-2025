@@ -1,8 +1,9 @@
 use std::fs::{self};
 
 mod part1;
+mod part2;
 
-use crate::part1::Part1;
+use crate::{part1::Part1, part2::Part2};
 
 fn get_id_ranges(file_name: &str) -> Vec<String> {
     let expect_msg = format!("Error: Could not find file {}.", file_name);
@@ -18,10 +19,15 @@ fn get_id_ranges(file_name: &str) -> Vec<String> {
 fn main() {
     let id_ranges = get_id_ranges("./input.txt");
 
-    let part1 = Part1::default(id_ranges);
+    let part1 = Part1::default(id_ranges.clone());
     let total = part1.solve();
 
     println!("PART 1 Answer: {total}");
+
+    let part2 = Part2::default(id_ranges.clone());
+    let total = part2.solve();
+
+    println!("PART 2 Answer: {total}");
 
     // invalid ids
     // any ID which is made only of some sequence of digits repeated twice.
