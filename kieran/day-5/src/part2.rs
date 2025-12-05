@@ -11,26 +11,31 @@ impl Part2 {
     }
 
     pub fn solve(&mut self) -> BigUint {
-        let mut ranges_stack: Vec<(BigUint, BigUint)> = vec![];
+        let mut ranges_stack: Vec<(BigUint, BigUint)> = self
+            .ranges
+            .iter()
+            .map(|range| {
+                // prep the ranges for sorting
+                let sp_range: Vec<BigUint> = range
+                    .split("-")
+                    .map(|s| {
+                        BigUint::parse_bytes(s.as_bytes(), 10).expect("Error parsing to BigUint")
+                    })
+                    .collect();
+                let lower = sp_range[0].clone();
+                let upper = sp_range[1].clone();
 
-        for range in &self.ranges {
-            let sp_range: Vec<BigUint> = range
-                .split("-")
-                .map(|s| BigUint::parse_bytes(s.as_bytes(), 10).expect("Error parsing to BigUint"))
-                .collect();
-            let lower = sp_range[0].clone();
-            let upper = sp_range[1].clone();
+                (lower, upper)
+            })
+            .collect();
 
-            ranges_stack.push((lower, upper));
-        }
-
+        // sort the ranges in order ascending upper bounds
         ranges_stack.sort_by(|a, b| a.1.cmp(&b.1));
 
-        let mut sorted = ranges_stack.clone();
         let mut sorted_ranges_stack: Vec<(BigUint, BigUint)> = vec![];
 
-        while !sorted.is_empty() {
-            let range = sorted.remove(0);
+        while !ranges_stack.is_empty() {
+            let range = ranges_stack.remove(0);
             let mut lower = range.0.clone();
             let mut upper = range.1.clone();
 
