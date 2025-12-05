@@ -1,8 +1,9 @@
 use std::fs;
 
-use crate::part1::Part1;
-
 mod part1;
+mod part2;
+
+use crate::{part1::Part1, part2::Part2};
 
 fn get_ingredients(file_name: &str) -> Vec<String> {
     let expect_msg = format!("Error: Could not find file {}.", file_name);
@@ -34,4 +35,9 @@ fn main() {
     let part1_solution = part1.solve();
 
     println!("PART 1 Answer: {}", part1_solution);
+
+    let mut part2 = Part2::default(ranges.clone());
+    let part2_solution = part2.solve();
+
+    println!("PART 2 Answer: {}", part2_solution);
 }
