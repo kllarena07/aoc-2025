@@ -38,7 +38,10 @@ impl Part2 {
                 let prev_lower = &top.0;
                 let prev_upper = &top.1;
 
-                // check if the current range overlaps the previous range
+                // check if the current range OR the previous range overlap
+                // they overlap if they fulfill the following conditions:
+                // 1. the CURRENT LOWER BOUND range falls within the previous range
+                // 2. the PREVIOUS LOWER BOUND range falls within the current range
                 if (prev_lower <= &lower && &lower <= prev_upper)
                     || (&lower <= prev_lower && prev_lower <= &upper)
                 {
