@@ -1,7 +1,9 @@
 use std::fs;
 
 mod part1;
-use crate::part1::Part1;
+mod part2;
+
+use crate::{part1::Part1, part2::Part2};
 
 fn get_paper_rolls(file_name: &str) -> Vec<Vec<char>> {
     let expect_msg = format!("Error: Could not find file {}.", file_name);
@@ -36,5 +38,10 @@ fn main() {
     let part1 = Part1::default(paper_rolls.clone());
     let part1_solution = part1.solve();
 
-    println!("PART 1 Anser: {part1_solution}");
+    println!("PART 1 Answer: {part1_solution}");
+
+    let mut part2 = Part2::default(paper_rolls.clone());
+    let part2_solution = part2.solve(&mut 0);
+
+    println!("PART 2 Answer: {part2_solution}");
 }
