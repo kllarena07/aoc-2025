@@ -34,13 +34,13 @@ impl Part1 {
             })
             .collect();
 
-        let mut answer = 0;
-
-        columns_data.iter().for_each(|line| {
+        let answer = columns_data.iter().fold(0, |answer, line| {
             let operation = line[0].as_str();
-            let start = 0 + ((operation == "*") as u128); // starting is 1 if operation is multiplication
+            // starting is 1 if operation is multiplication
+            // going of the assumption that operation can ONLY be either * or +
+            let start = 0 + ((operation == "*") as u128);
 
-            let accumulator = &line[1..].iter().fold(start, |acc, s_num| {
+            let accumulator = line[1..].iter().fold(start, |acc, s_num| {
                 let p_num = s_num.parse::<u128>().unwrap();
 
                 if operation == "*" {
@@ -50,7 +50,7 @@ impl Part1 {
                 }
             });
 
-            answer += accumulator;
+            answer + accumulator
         });
 
         answer
