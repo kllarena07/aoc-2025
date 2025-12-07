@@ -1,8 +1,8 @@
 use std::fs;
 
-use crate::part1::Part1;
-
 mod part1;
+
+use crate::part1::Part1;
 
 fn get_tachyon_manifold_diagram(file_name: &str) -> Vec<Vec<char>> {
     let expect_msg = format!("Error: Could not find file {}.", file_name);
